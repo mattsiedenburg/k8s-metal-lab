@@ -4,6 +4,7 @@ Just documenting my baremetal kubernetes setup.
 
 - [k8s-metal-lab](#k8s-metal-lab)
   - [Principles](#principles)
+  - [Tools](#tools)
   - [Rationale](#rationale)
   - [Hardware](#hardware)
     - [Physical NICs](#physical-nics)
@@ -13,29 +14,38 @@ Just documenting my baremetal kubernetes setup.
 
 ## Principles
 
-- Automated setup and teardwon (as much as possible)
-- Repeatable
-- Ansible as much as possible and Bash for the rest
-- Generic, agnostic, non-opionionated (as much as possible)
-- Vanilla Kubernetes (kubeadm)
+This exercise and cluster must be:
+
+- Documented and repeatable
+- Functional and useful
+- Automated from setup to teardown (as much as possible)
+- As declarative, generic, agnostic, and non-opionionated as possible
+
+## Tools
+
+- Git for documentation and saving YAML and scripts
+- Ansible for setup and teardown (and bash where necessary)
+- kubeadm for setup
 - Flannel for networking
 - MetalLB for load balancing
-- An NFS provisioner TBD for network-attched storage
+- A NFS provisioner TBD for persistent storage
+- Prometheus and Grafana for monitoring and reporting
+- kubectl and YAML for deployments
 
 ## Rationale
 
-I've used Kubespray for a Raspberry Pi cluster before but it didn't give me any practice with Ansible and largely hid the nuts and bolts of Kubernetes. Kubernetes the Hardway is a field too far. This, I hope is a happy medium.
+I've used Kubespray for a Raspberry Pi cluster before but it didn't give me any practice with Ansible and largely hid the nuts and bolts of Kubernetes. Kubernetes the Hardway is a field too far. This, I hope is a happy medium that would prove useful in many scenarios.
 
 ## Hardware
 
-- Four (4) NUCs
-- A consumer-grade router with a built-in DHCP server that I can resrves IP address on
-- A gigabit switch plugged into my router
-- A simple NAS for NFS storage
+- Four NUCs
+- Consumer-grade router with a built-in DHCP server that I can resrves IP address on
+- Gigabit switch plugged into my router
+- Simple NAS for NFS storage
 
 ### Physical NICs
 
-To keep things simple, I'll statically assign IPs or create reservations on my DHCP server. I'll also name the host by IP address since I plan to make every node a worker node, including those with control plane roles.
+To keep things simple, I'll statically assign IPs or create reservations in my DHCP server. I'll also name the host by IP address since I plan to make every node a worker node, including those with control plane roles.
 
 |MAC|IP|HOSTNAME|
 |---|---|---|
@@ -55,3 +65,5 @@ The NUCs come with legacy generation Intel Core i5 CPUs and 8GB of RAM. Nothing 
 ## Citations and Acknowledgements
 
 Much of what I've learned has be "self-taught" as in I didn't have a mentor or teacher. But I'm inspired by and borrow heavily from Jeff Geerling.
+
+I'm sticking to the official Kubernetes documentation for much of the Kubernetes-specific setup.
