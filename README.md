@@ -34,7 +34,9 @@ This exercise and cluster must be:
 
 ## Rationale
 
-I've used Kubespray for a Raspberry Pi cluster before but it didn't give me any practice with Ansible and largely hid the nuts and bolts of Kubernetes. Kubernetes the Hardway is a field too far. This, I hope is a happy medium that would prove useful in many scenarios.
+I've used Kubespray before but it didn't give me any practice with Ansible and largely hid the nuts and bolts of Kubernetes. I eventually used Ansible for my Raspberry Pi cluster but the cluster was underpowered.
+
+Kubernetes the Hardway is a field too far. This, I hope, is a happy medium that would prove useful in many scenarios.
 
 ## Hardware
 
