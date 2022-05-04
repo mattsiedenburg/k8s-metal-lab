@@ -1,0 +1,55 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Install prereqs for Kubernetes
+      apt:
+        name: "{{ packages }}"
+        update_cache: yes
+        cache_valid_time: 600
+        state: present
+      vars:
+        packages:
+          - containerd
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gnupg-agent
+          - software-properties-common
+    - name: Add apt signing key for Kubernetes
+      apt_key:
+        url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+        state: present
+    - name: Add apt repository for Kubernetes
+      apt_repository:
+        repo: deb https://apt.kubernetes.io/ kubernetes-xenial main
+        state: present
+        filename: kubernetes.list
+    - name: Install packages
+      apt:
+        name: "{{ packages }}"
+        update_cache: yes
+        cache_valid_time: 600
+        state: present
+      vars:
+        packages:
+          - kubelet
+          - kubeadm
+          - kubectl
+    - name: Hold versions of containerd
+      dpkg_selections:
+        name: containerd
+        selection: hold
+    - name: Hold versions of kubeadm
+      dpkg_selections:
+        name: kubeadm
+        selection: hold
+    - name: Hold versions of kubelet
+      dpkg_selections:
+        name: kubelet
+        selection: hold
+    - name: Hold versions of kubectl
+      dpkg_selections:
+        name: kubectl
+        selection: hold
+          

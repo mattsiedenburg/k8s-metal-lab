@@ -1,0 +1,18 @@
+---
+- name: Update
+  hosts: all
+  become: true
+  tasks:  
+    - name: Upgrade installed apt packages
+      ansible.builtin.apt:
+        update_cache: yes
+        cache_valid_time: 600
+        upgrade: dist
+    - name: Check if a reboot is required
+      stat:
+        path: /var/run/reboot-required
+      notify: reboot_required
+  handlers:
+    - name: reboot_required
+      reboot:
+        reboot_timeout: 3600
