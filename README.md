@@ -243,10 +243,18 @@ Set default remote user.
 remote_user=debian
 ```
 
+Set default inenvotry file.
+
+```text
+[defaults]
+...
+inventory=inventory.ini
+```
+
 Ping the inventory.
 
 ```bash
-ansible all -i inventory.ini -m ping
+ansible all -m ping
 ```
 
 Expected output:
@@ -337,7 +345,7 @@ Update:
 Example usage:
 
 ```bash
-ansible-playbook update.yaml -i inventory.ini
+ansible-playbook update.yaml
 ```
 
 ## Playbook
