@@ -246,6 +246,7 @@ remote_user=debian
 Set default inenvotry file.
 
 ```text
+# ansible.cfg
 [defaults]
 ...
 inventory=inventory.ini
