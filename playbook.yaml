@@ -52,4 +52,3 @@
       dpkg_selections:
         name: kubectl
         selection: hold
-          

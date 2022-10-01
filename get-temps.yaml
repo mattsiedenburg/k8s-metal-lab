@@ -1,0 +1,9 @@
+- name: Get temperature readings
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Temperature
+      shell: 'vcgencmd measure_temp'
+      register: command_output
+    - debug:
+        var: command_output.stdout_lines
