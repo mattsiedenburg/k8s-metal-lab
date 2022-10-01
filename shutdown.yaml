@@ -2,5 +2,5 @@
   hosts: all
   become: yes
   tasks:
-    - name: Shutdowm
+    - name: Shutdown
       community.general.shutdown:
